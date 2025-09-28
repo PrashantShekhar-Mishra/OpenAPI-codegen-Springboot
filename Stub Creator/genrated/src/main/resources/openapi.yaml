@@ -1,0 +1,299 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- description: Generated server url
+  url: http://localhost:8000
+paths:
+  /StudentResult/{id}:
+    delete:
+      operationId: deleteStudentResult
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: OK
+      tags:
+      - student-result-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: student-result-controller
+    get:
+      operationId: getStudentResultById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StudentResult'
+          description: OK
+      tags:
+      - student-result-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: student-result-controller
+    put:
+      operationId: updateStudentResult
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentResult'
+        required: true
+      responses:
+        "200":
+          description: OK
+      tags:
+      - student-result-controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: student-result-controller
+  /Student/student/{id}:
+    delete:
+      operationId: deleteStudent
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: No Content
+      tags:
+      - student-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: student-controller
+    get:
+      operationId: getStudent
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: OK
+      tags:
+      - student-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: student-controller
+    put:
+      operationId: updateStudent
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Student'
+          description: OK
+      tags:
+      - student-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: student-controller
+  /StudentResult:
+    post:
+      operationId: createStudentResult
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentResult'
+        required: true
+      responses:
+        "201":
+          description: Created
+      tags:
+      - student-result-controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: student-result-controller
+  /Student/student:
+    get:
+      operationId: getAllStudents
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Student'
+                type: array
+          description: OK
+      tags:
+      - student-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: student-controller
+    post:
+      operationId: createStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        "201":
+          description: Created
+      tags:
+      - student-controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: student-controller
+  /studentResult:
+    get:
+      operationId: getAllStudentResult
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/StudentResult'
+                type: array
+          description: OK
+      tags:
+      - student-result-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: student-result-controller
+  /Student/studentName/{name}:
+    get:
+      operationId: getStudentByName
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Student'
+                type: array
+          description: OK
+      tags:
+      - student-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: student-controller
+components:
+  schemas:
+    StudentResult:
+      example:
+        exam: exam
+        rollno: 6
+        marks: 0
+      properties:
+        marks:
+          format: int32
+          type: integer
+        exam:
+          type: string
+        rollno:
+          format: int32
+          type: integer
+      type: object
+    Address:
+      example:
+        address: address
+        id: 0
+      properties:
+        id:
+          format: int32
+          type: integer
+        address:
+          type: string
+      type: object
+    Student:
+      example:
+        address:
+        - address: address
+          id: 0
+        - address: address
+          id: 0
+        name: name
+        rollno: 1
+        branch: branch
+        percent: 6.0274563
+      properties:
+        branch:
+          type: string
+        address:
+          items:
+            $ref: '#/components/schemas/Address'
+          type: array
+        name:
+          type: string
+        percent:
+          format: float
+          type: number
+        rollno:
+          format: int32
+          type: integer
+      type: object
